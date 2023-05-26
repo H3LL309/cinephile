@@ -110,6 +110,16 @@
     }
 }
 
+.upcoming-enter-active,
+.upcoming-leave-active {
+    transition: 0.3s ease-in-out;
+}
+
+.upcoming-enter-from {
+    transform: scale(1.2);
+    opacity: 0;
+}
+
 
 @keyframes time {
     0% {

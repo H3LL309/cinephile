@@ -1,6 +1,6 @@
 <template>
-    <div class="footer" style="color:white">
-        Footer
+    <div class="footer" style="color: white;">
+        footer
     </div>
 </template>
 
@@ -8,4 +8,3 @@
 
 </script>
 
-<style lang="scss" scoped></style>

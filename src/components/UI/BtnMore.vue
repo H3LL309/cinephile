@@ -23,6 +23,7 @@
         font-size: 20px;
         font-weight: 400;
         line-height: 30px;
+        color: white;
     }
 }
 </style>

@@ -10,10 +10,10 @@ $weight in $Raleway {
     }
 }
 
-$Montserrat:('Montserrat-Bold', 700),
-('Montserrat-BoldItalick', 700),
+$Montserrat:('Montserrat-Light', 300),
 ('Montserrat-Regular', 400),
-('Montserrat-Light', 300);
+('Montserrat-Bold', 700),
+('Montserrat-BoldItalic', 700);
 
 @each $name,
 $weight in $Montserrat {

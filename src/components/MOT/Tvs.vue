@@ -6,3 +6,4 @@
 import Content from './Content.vue'
 </script>
 
+<style lang="scss" scoped></style>

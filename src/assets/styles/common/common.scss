@@ -4,8 +4,8 @@
     box-sizing: border-box;
     font-family: 'Raleway';
     font-weight: 400;
-    list-style: none;
     text-decoration: none;
+    list-style: none;
 }
 
 .container {
@@ -18,29 +18,17 @@
 
 body {
     background: #141414;
+    // overflow-x: hidden;
     color: white;
-    /* overflow-x: hidden; */
-}
-
-html,
-body {
-    height: 100%;
-}
-
-#app {
-    height: 100%;
 }
 
 .wrapper {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
-.content {
-    flex: 1 0 auto;
-    height: 100%;
-}
+
 
 @mixin media($size) {
     @media screen and (max-width:#{$size}px) {

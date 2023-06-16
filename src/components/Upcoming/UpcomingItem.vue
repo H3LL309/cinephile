@@ -1,11 +1,12 @@
 <template>
-    <transition name="upcoming-item" mode="out-in">
-        <div class="main__upcoming-item" v-if="slideView == idx">
-            <img :src="imgUrlFull + movie.backdrop_path" class=" main__upcoming-item-img" alt="">
+    <Transition name="upcoming-item" mode="out-in">
+        <div class=" main__upcoming-item" v-if="slideView == idx">
+            <img :src="imgUrlFull + movie.backdrop_path" class="main__upcoming-item-img" alt="">
             <div class="main__upcoming-content">
                 <div class="main__upcoming-info">
                     <h1 class="main__upcoming-content-title">{{ movie.title }}</h1>
-                    <p class="main__upcoming-content-text">{{ movie.overview }}
+                    <p class="main__upcoming-content-text">
+                        {{ movie.overview }}
                     </p>
                     <BtnMore />
                 </div>
@@ -23,8 +24,8 @@
 </template>
 
 <script setup>
-import BtnMore from '@/components/UI/BtnMore.vue';
-import { imgUrl, imgUrlFull } from "@/static.js"
+import BtnMore from '../UI/BtnMore.vue';
+import { imgUrl, imgUrlFull } from "@/static.js";
 
 const props = defineProps({
     movie: {
@@ -38,11 +39,12 @@ const props = defineProps({
     idx: {
         type: Number
     },
-    slideView:{
-        type: Number,
-        
+    slideView: {
+        type: Number
     }
 })
+
+
 
 </script>
 

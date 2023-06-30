@@ -20,6 +20,6 @@ export const usePopular = defineStore({
             } catch (error) {
                 console.log(error);
             }
-        }
+        } 
     }
 })

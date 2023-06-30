@@ -1,16 +1,25 @@
 <template>
     <div class="main__info">
         <img src="@/assets/images/close.svg" alt="" class="main__info-close" @click="$emit('close')">
-        <div class="main__info-block">
-            <img src="@/assets/images/block.jpg" alt="" class="main__info-img">
+        <div class="main__info-block" v-if="current">
+            <img :src="imgUrlFull + current.backdrop_path" alt="" class="main__info-img">
             <div class="main__info-content">
                 <div class="main__info-content-block">
-                    <h2 class="main__info-content-title">Шан-Чи и легенда десяти колец</h2>
-                    <p class="main__info-content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh bibendum nec, pulvinar id in in ac nisl semper. Condimentum tellus ac integer condimentum. Amet, vitae dictum convallis dignissim. Lacus, suscipit sagittis, adipiscing metus, risus convallis sit...</p>
-                    <p class="main__info-content-date">
-                        <span>2023</span>
-                        <span>боевик, приключения, фэнтези</span>
+                    <h2 class="main__info-content-title">
+                        {{ current.title || current.name }}
+                    </h2>
+                    <p class="main__info-content-text">
+                        {{ current.overview }}
                     </p>
+                    <p class="main__info-content-date">
+                        <span>
+                            {{ new Date(current.release_date).getFullYear() ||
+                                new Date(current.first_air_date).getFullYear()
+                            }}
+                        </span>
+                        <span> {{getGenres }}</span>
+                    </p>
+                    <BtnMore />
                 </div>
             </div>
         </div>
@@ -19,11 +28,12 @@
 
 <script setup>
 import { imgUrlFull } from '@/static'
+import { computed } from 'vue'
 
 const props = defineProps(['current', 'type'])
+const getGenres = computed(() => props.current.genres.reduce((acc, item) => acc + `, ${item.name}`, ""))
 
-
-
+console.log(getGenres);
 
 </script>
 

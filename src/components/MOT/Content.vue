@@ -5,7 +5,7 @@
             <img src="@/assets/images/arrow.png" alt="">
         </router-link>
         <Swiper :modules="modules" :space-between="25" :navigation="true" :breakpoints="swiperOptions.breakpoints">
-            <Swiper-slide class="main__video-item" v-for="(item, idx) in content" :key="item.id">
+            <Swiper-slide class="main__video-item" v-for="(item, idx) in content" :key="item.id" @click="getItem(item)">
                 <img v-lazy="imgUrlFull + item.poster_path" alt="" class="main__video-item-img">
                 <router-link :to="`${props.type}/`" class="main__video-item-link" />
                 <h2 class="main__video-item-title">{{ item.title || item.name }}</h2>
@@ -16,9 +16,10 @@
                 </router-link>
             </Swiper-slide>
         </Swiper>
-        <InfoBlock :current="current" :type="type" @close="close" />
+        <div class="main__inf" :class="{ active: open }" ref="inf">
+            <InfoBlock :current="current" :type="type" @close="close" />
+        </div>
     </section>
-    <!-- <Loader v-else/> -->
 </template>content
 
 <script setup>
@@ -27,6 +28,7 @@ import { Navigation } from 'swiper'
 import 'swiper/scss'
 import 'swiper/scss/navigation'
 import { usePopular } from '@/stores/popular'
+import { useItemId } from '@/stores/itemId'
 import { onMounted, ref, computed } from 'vue';
 import { imgUrl, imgUrlFull } from "@/static.js";
 import InfoBlock from '@/components/InfoBlock/InfoBlock.vue';
@@ -36,6 +38,8 @@ import InfoBlock from '@/components/InfoBlock/InfoBlock.vue';
 
 const props = defineProps(['type'])
 const popular = usePopular()
+const ItemIdStore = useItemId()
+
 
 let modules = ref([Navigation])
 let swiperOptions = ref({
@@ -67,10 +71,27 @@ onMounted(() => {
 })
 
 let current = ref(null)
-let info = ref(null)
+let inf = ref(null)
+let open = ref(false)
+
+const getItem = async item => {
+    current.value = null
+    await ItemIdStore.getItemId({ type: props.type, id: item.id })
+
+    current.value = props.type == 'movie' ? ItemIdStore.movie : ItemIdStore.tv
+
+    open.value = true
+    let infTop = inf.value.offsetTop
+    window.scrollTo({
+        top: infTop - navHeight.offsetHeight,
+        behavior: 'smooth'
+    })
+}
+
 
 const close = () => {
-    console.log(current.value);
+    open.value = false
+    current.value = null
 }
 
 
